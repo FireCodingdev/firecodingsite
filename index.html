@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireCodingDeveloper | Desenvolvimento de Software</title>
+    <link rel="icon" href="imagens/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CONFIGURAÇÕES GERAIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* CABEÇALHO - AJUSTADO PARA LOGO MAIOR */
+        header {
+            background-color: rgba(22, 27, 34, 0.98);
+            padding: 10px 8%; /* Reduzi o padding vertical para a logo ocupar mais espaço relativo */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 87, 34, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            height: 100px; /* Altura fixa para garantir que a logo grande não quebre o layout */
+        }
+
+        .logo {
+            display: flex;
+            align-self: center; 
+            padding-bottom: 0px;
+        }
+
+        .logo-img {
+            height: 200px; /* Aumentado significativamente (era ~42px) */
+            width: auto;
+            object-fit: contain;
+            /* Melhora a qualidade visual e destaque */
+            filter: drop-shadow(0 0 8px rgba(255, 87, 34, 0.4)); 
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05); /* Leve pulsação ao passar o mouse */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 35px;
+        }
+
+        nav ul li a {
+            color: #c9d1d9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:hover {
+            color: #ff5722;
+        }
+
+        /* SEÇÃO HERO - ESPAÇAMENTO MANTIDO */
+        .hero {
+            padding: 160px 5% 450px;
+            text-align: center;
+            position: relative;
+            background-color: #0d1117;
+            background-image: radial-gradient(circle at center, rgba(255, 87, 34, 0.12) 0%, rgba(13, 17, 23, 1) 75%),
+            url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 32c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57 70c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5z' fill='%23ff5722' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            color: #ffffff;
+            margin-bottom: 25px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #8b949e;
+        }
+
+        .btn-principal {
+            background-color: #ff5722;
+            color: white;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .btn-principal:hover {
+            background-color: #e64a19;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 87, 34, 0.4);
+        }
+
+        /* SERVIÇOS */
+        .servicos {
+            padding: 120px 8%;
+            text-align: center;
+            background-color: #0d1117;
+            border-top: 1px solid rgba(48, 54, 61, 0.5);
+        }
+
+        .servicos h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 60px;
+        }
+
+        .grid-servicos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card-servico {
+            background-color: #161b22;
+            padding: 60px 40px;
+            border-radius: 16px;
+            border: 1px solid #30363d;
+            position: relative;
+            transition: 0.4s ease;
+        }
+
+        .card-servico::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ff5722, transparent);
+            border-radius: 10px 10px 0 0;
+            opacity: 0.6;
+        }
+
+        .card-servico i {
+            font-size: 3rem;
+            color: #ff5722;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .card-servico h3 {
+            font-size: 1.6rem;
+            color: #f0f6fc;
+            margin-bottom: 15px;
+        }
+
+        .card-servico p {
+            color: #8b949e;
+        }
+
+        .card-servico:hover {
+            border-color: #ff5722;
+            transform: translateY(-12px);
+            background-color: #1c2128;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* BENEFÍCIOS */
+        .beneficios-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            padding: 60px 8%;
+            background: rgba(22, 27, 34, 0.8);
+            border-top: 1px solid #30363d;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .item-beneficio {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .item-beneficio i {
+            color: #ff5722;
+            font-size: 1.4rem;
+        }
+
+        .item-beneficio h4 {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .item-beneficio p {
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        /* ORÇAMENTO */
+        .secao-orcamento {
+            padding: 120px 8%;
+            background-color: #0d1117;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 60px auto 0;
+            background-color: #161b22;
+            padding: 60px;
+            border-radius: 24px;
+            text-align: left;
+            border: 1px solid #30363d;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            color: #f0f6fc;
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            color: white;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #ff5722;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+        }
+
+        /* WHATSAPP */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 1000;
+            transition: 0.4s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15) rotate(15deg);
+        }
+
+        footer {
+            padding: 80px 8% 40px;
+            text-align: center;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding: 120px 5% 200px; }
+            header { padding: 10px 5%; height: auto; }
+            .logo-img { height: 50px; }
+            nav ul { display: none; }
+            .form-container { padding: 35px; }
+        }
+
+        /* CARROSSEL */
+        .carousel-section {
+            position: relative;
+            overflow: hidden;
+            padding: 50px 8%;
+            background-color: #0d1117;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-card {
+            min-width: 320px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .carousel-info {
+            padding: 20px;
+        }
+
+        .carousel-info h3 {
+            color: #ff5722;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .carousel-info p {
+            color: #8b949e;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 8px;
+            z-index: 10;
+        }
+
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="imagens/logo.png" alt="FireCoding" class="logo-img">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#orcamento">Orçamento</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Transformamos Ideias em Código</h1>
+        <p>Soluções em desenvolvimento de software sob medida para escalar o seu negócio com tecnologia de ponta e arquitetura robusta.</p>
+        <a href="#orcamento" class="btn-principal">Solicitar um Orçamento</a>
+    </section> 
+
+        <section class="carousel-section">
+            <div class="carousel-track" id="carouselTrack">
+
+            <!-- CARD 1 -->
+            <div class="carousel-card">
+                <img src="imagens/exemplo-landing.png" alt="Landing Page">
+                <div class="carousel-info">
+                    <h3>Landing Page Profissional</h3>
+                    <p>✔ Design moderno e responsivo<br>
+                       ✔ Foco em conversão de leads<br>
+                        ✔ SEO otimizado<br>
+                        ✔ Carregamento ultra-rápido</p>
+                 </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="carousel-card">
+            <img src="imagens/exemplo-app.png" alt="App Híbrido">
+            <div class="carousel-info">
+                <h3>Aplicativo Desktop & Mobile</h3>
+                <p>✔ Interface adaptada para todos os dispositivos<br>
+                ✔ iOS, Android e Web<br>
+                ✔ Performance nativa<br>
+                ✔ Sincronização em tempo real</p>
+            </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="carousel-card">
+            <img src="imagens/exemplo-api.png" alt="APIs e Integrações">
+            <div class="carousel-info">
+                <h3>APIs & Integrações</h3>
+                <p>✔ Integração com sistemas externos<br>
+                ✔ RESTful e documentado<br>
+                ✔ Alta disponibilidade (99.9% uptime)<br>
+                ✔ Autenticação segura (JWT/OAuth)</p>
+            </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="carousel-card">
+            <img src="imagens/exemplo-dashboard.png" alt="Dashboard">
+            <div class="carousel-info">
+                <h3>Dashboards & Painéis Admin</h3>
+                <p>✔ Relatórios em tempo real<br>
+                ✔ Gráficos interativos<br>
+                ✔ Controle de usuários e permissões<br>
+                ✔ Exportação de dados (PDF/Excel)</p>
+            </div>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="carousel-card">
+            <img src="imagens/exemplo-ecommerce.png" alt="E-commerce">
+            <div class="carousel-info">
+                <h3>Lojas Virtuais / E-commerce</h3>
+                <p>✔ Catálogo de produtos dinâmico<br>
+                ✔ Integração com gateways de pagamento<br>
+                ✔ Painel de gestão de pedidos<br>
+                ✔ Cupons, frete e promoções</p>
+            </div>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="carousel-card">
+            <img src="imagens/exemplo-automacao.png" alt="Automação">
+            <div class="carousel-info">
+                <h3>Automação de Processos</h3>
+                <p>✔ Bots e scripts personalizados<br>
+                ✔ Integração com WhatsApp, e-mail e ERP<br>
+                ✔ Redução de tarefas manuais<br>
+                ✔ Notificações automáticas</p>
+            </div>
+            </div>
+
+        </div>
+
+        <!-- Botões de navegação -->
+        <button class="carousel-btn prev" onclick="moverCarousel(-1)">&#10094;</button>
+        <button class="carousel-btn next" onclick="moverCarousel(1)">&#10095;</button>
+    </section>
+
+        <section id="servicos" class="servicos">
+            <h2>Consultorias Especializadas</h2>
+            <div class="grid-servicos">
+                <div class="card-servico">
+                    <i class="fas fa-globe"></i>
+                    <h3>Sistemas Web</h3>
+                    <p>Plataformas modernas, escaláveis e totalmente responsivas com as melhores tecnologias do mercado.</p>
+                </div>
+                <div class="card-servico">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Aplicativos</h3>
+                    <p>Apps nativos e híbridos para iOS e Android focados em performance e experiência do usuário final.</p>
+                </div>
+                <div class="card-servico">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>APIs e Integrações</h3>
+                    <p>Ecossistemas conectados com segurança, documentação clara e alta disponibilidade de dados.</p>
+                </div>
+            </div>
+        </section>
+
+    <div class="beneficios-row">
+        <div class="item-beneficio">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <h4>Qualidade Superior</h4>
+                <p>Código limpo e revisado.</p>
+            </div>
+        </div>
+        <div class="item-beneficio">
+            <i class="fas fa-bolt"></i>
+            <div>
+                <h4>Agilidade</h4>
+                <p>Prazos que respeitam o negócio.</p>
+            </div>
+        </div>
+        <div class="item-beneficio">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+                <h4>Segurança</h4>
+                <p>Proteção total dos seus dados.</p>
+            </div>
+        </div>
+        <div class="item-beneficio">
+            <i class="fas fa-sync"></i>
+            <div>
+                <h4>Manutenção</h4>
+                <p>Suporte contínuo pós-entrega.</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="orcamento" class="secao-orcamento">
+        <h2 style="font-size: 2.8rem; color: #ffffff;">Pronto para decolar?</h2>
+        <div class="form-container">
+            <form id="formOrcamento">
+                <div class="form-group">
+                    <label>Nome ou Empresa</label>
+                    <input type="text" name="nome" placeholder="Como devemos te chamar?" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail para Contato</label>
+                    <input type="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Projeto</label>
+                    <select name="projeto">
+                        <option value="web">Plataforma Web / SaaS</option>
+                        <option value="mobile">Aplicativo iOS/Android</option>
+                        <option value="api">API / Integração</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Conte-nos brevemente o desafio</label>
+                    <textarea name="mensagem" rows="6" placeholder="Quais as principais funcionalidades?" required></textarea>
+                </div>
+                <button type="submit" class="btn-principal" style="width: 100%;">Enviar Solicitação</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 FireCodingDeveloper. Todos os direitos reservados. <br> <span style="color: #ff5722; font-weight: bold;">Built with Fire & Code.</span></p>
+    </footer>
+
+    <a href="https://wa.me/5574988482293" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 35px;">
+    </a>
+
+    <script>
+        let posicaoAtual = 0;
+
+        function moverCarousel(direcao) {
+            const track = document.getElementById('carouselTrack');
+            const cards = track.querySelectorAll('.carousel-card');
+            const larguraCard = cards[0].offsetWidth + 30; // 30 = gap
+            const totalCards = cards.length;
+            const visiveis = Math.floor(track.parentElement.offsetWidth / larguraCard);
+            const maxPos = totalCards - visiveis;
+
+            posicaoAtual += direcao;
+            if (posicaoAtual < 0) posicaoAtual = 0;
+            if (posicaoAtual > maxPos) posicaoAtual = maxPos;
+
+            track.style.transform = `translateX(-${posicaoAtual * larguraCard}px)`;
+        }
+
+        // --- Lógica do Botão de Enviar (ADICIONADA/CORRIGIDA) ---
+        document.getElementById('formOrcamento').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Impede a página de recarregar
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            
+            // Feedback visual de carregamento
+            btn.innerText = "Enviando Solicitação...";
+            btn.disabled = true;
+
+            // Coleta os dados exatamente como o enviar.js espera
+            const dados = {
+                nome: e.target.nome.value,
+                email: e.target.email.value,
+                projeto: e.target.projeto.value,
+                mensagem: e.target.mensagem.value
+            };
+
+            try {
+                const resposta = await fetch('/api/enviar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dados)
+                });
+
+                if (resposta.ok) {
+                    // Sucesso: Muda a cor do botão e limpa o formulário
+                    btn.innerText = "✓ Enviado com Sucesso!";
+                    btn.style.background = "#2ea44f"; 
+                    e.target.reset();
+                    
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = ""; 
+                        btn.disabled = false;
+                    }, 5000);
+                } else {
+                    const errorMsg = await resposta.json();
+                    throw new Error(errorMsg.error || 'Erro no servidor');
+                }
+            } catch (err) {
+                console.error("Erro no envio:", err);
+                alert('Ops! Algo deu errado ao enviar. Por favor, tente pelo WhatsApp.');
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+</script>
+
+</body>
+</html>
