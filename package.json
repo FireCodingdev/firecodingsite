@@ -1,0 +1,10 @@
+{
+  "name": "firecoding-site",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0"
+  }
+}
