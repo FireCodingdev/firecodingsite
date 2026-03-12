@@ -93,6 +93,34 @@
         }
 
         /* SEÇÃO HERO - ESPAÇAMENTO MANTIDO */
+        .botoes-hero {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-app {
+            background-color: transparent;
+            color: #ff5722;
+            padding: 18px 45px;
+            border: 2px solid #ff5722;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-app:hover {
+            background-color: rgba(255, 87, 34, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 87, 34, 0.2);
+        }
         .hero {
             padding: 160px 5% 450px;
             text-align: center;
@@ -361,17 +389,17 @@
             font-size: 1.1rem;
         }
         .card-link-catalogo {
-            color: #ff5722 
+            color: #ff5722;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         
         .card-link-catalogo:active {
-            color: #007bff
+            color: #007bff;
         }
         
         .card-link-catalogo:visited {
-            color: #6f42c1 
+            color: #6f42c1;
         }
         
         .card-link-catalogo:hover {
@@ -420,7 +448,11 @@
     <section class="hero">
         <h1>Transformamos Ideias em Código</h1>
         <p>Soluções em desenvolvimento de software sob medida para escalar o seu negócio com tecnologia de ponta e arquitetura robusta.</p>
+        <div class="botoes-hero">
         <a href="#orcamento" class="btn-principal">Solicitar um Orçamento</a>
+        <a href="#" class="btn-app" download>
+            <i class="fab fa-android"></i> Baixar App
+        </a>
     </section> 
 
         <section class="carousel-section">
