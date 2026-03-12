@@ -702,6 +702,13 @@
                 btn.disabled = false;
             }
         });
+        if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker ativo!', reg))
+            .catch(err => console.error('Erro no Service Worker:', err));
+        });
+        }
 </script>
 
 </body>
